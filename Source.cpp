@@ -15,7 +15,7 @@ vector<Scalar> drawingColors = {
 vector<Scalar> lowerBounds = { Scalar(0, 50, 50),Scalar(35, 50, 50), Scalar(100, 50, 50) }; //Upper bound for red green and blue
 vector<Scalar> upperBounds = { Scalar(10, 255, 255),Scalar(85, 255, 255), Scalar(140, 255, 255) }; //Lower bound for red green and blue
 
-int selectedColor = 0;  // Global variable used by trackbar callback
+int selectedColor = 0;  
 int redValue = 0;
 int greenValue = 0;
 int blueValue = 0;
@@ -25,13 +25,10 @@ private:
     Scalar currentColor;
 
     Point getContours(const Mat& image, const Mat& frame) {
-        // Implementation of getContours function
-        // ...
         vector<vector<Point>> contours;
         vector<Vec4i> hierarchy;
 
         findContours(image, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-        //drawcontours(img, contours, -1, Scalar(255, 0, 255), 2);
         vector<vector<Point>> conPoly(contours.size());
         vector<Rect> boundRect(contours.size());
 
@@ -105,8 +102,6 @@ public:
     }
 
     void drawPalette(Mat& img) {
-        // Logic from drawColorPalette()
-        // ...
         int totalLength = (drawingColors.size() + 1) * iconRadius * 2 + (drawingColors.size()) * iconSpace;  // +1 for eraser
         Point startingPoint((img.cols - totalLength) / 2, img.rows - 2 * iconRadius - iconSpace);
         for (size_t i = 0; i < drawingColors.size(); ++i) {
@@ -130,13 +125,11 @@ public:
     void checkColorChangeOrEraser(Pen& pen, const Point& point, const Mat& img) {
 
         int totalLength = (drawingColors.size() + 1) * iconRadius * 2 + (drawingColors.size()) * iconSpace; // +1 for eraser
-        //Point startingPoint((img.cols - totalLength) / 2, img.rows - 2 * iconRadius - iconSpace);
         Point startingPoint((img.cols - totalLength) / 2, img.rows - 2 * iconRadius - iconSpace);
         for (size_t i = 0; i < drawingColors.size(); ++i) {
             Point iconCenter = Point(startingPoint.x + i * (2 * iconRadius + iconSpace), startingPoint.y);
             if (isInsideColorIcon(point, iconCenter, iconRadius)) {
                 pen.setColor(drawingColors[i]);
-                //currentDrawingColor = drawingColors[i];
                 eraserMode = false;  // Deactivate eraser mode when color is picked
                 break;
             }
@@ -223,9 +216,6 @@ Mat locatePen(const Mat& img) {
 
     imshow("Detected Color", mask);  // Changed the name of the window
     return mask;
-
-    //Scalar lower(hmin, smin, vmin);
-    //Scalar upper(hmax, smax, vmax);
 }
 
 int main() {
@@ -236,8 +226,6 @@ int main() {
 
 
     namedWindow("Color Selector", 1);
-    //createTrackbar("Color", "Color Selector", &selectedColor, lowerBounds.size() - 1, on_trackbar);
-    //namedWindow("Color Selector", 1);
 
 // Creating trackbars for Red, Green, and Blue
 createTrackbar("Red", "Color Selector", &redValue, 1, on_trackbar);
