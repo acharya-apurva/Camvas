@@ -9,6 +9,10 @@
 4. **Color Selector** → Users can choose the color they want the program detect as a pen in the webcam by using the color selector tool
 5. **Canvas Management** → Drawn content is stored on a dedicated canvas (which is different from the webcam feed) to create a smooth drawing and erasing experience
 
+The image shows the project in action:
+![image](https://github.com/acharya-apurva/Camvas/assets/113264267/70c028a8-41d0-4bd6-b8fc-8d53a169abcf)
+
+
 ## Author
 Apurva Acharya
 
